@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="results">Risultati per</string>
+    <string name="app_name">GreenPalate</string>
+    <string name="history">Ricerche recenti</string>
+    <string name="searchview_hint">Inserisci una categoria di alimenti</string>
+    <string name="protein_textview">Proteine</string>
+    <string name="carbohydrates_textview">Carboidrati</string>
+    <string name="fat_row_textview">Grassi</string>
+    <string name="energy_textview">Energia</string>
+    <string name="saturated_fat_textview">Grassi Saturi</string>
+    <string name="sodium_textview">Sodio</string>
+    <string name="salt_textview">Sale</string>
+    <string name="sugar_textview">Zucchero</string>
+</resources>
