@@ -48,18 +48,19 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this)
                 .setCancelable(false)
-                .setTitle(("R.string.no_route_alert_title"))
-                .setMessage("no_route_alert_form")
-                .setPositiveButton("R.string.back", new DialogInterface.OnClickListener() {
+                .setTitle((R.string.no_connection_alert_title))
+                .setMessage(R.string.no_connection_message)
+                .setPositiveButton(R.string.ok_string, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
                     }
                 })
-                .setIcon(R.drawable.no_image);
+                .setIcon(R.drawable.no_wifi);
 
         mFoodSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String submit) {
-                if (Utilities.isNetworkAvailable(getApplication()) == false) {
+                if (!Utilities.isNetworkAvailable(getApplication())) {
                     mDialogBuilder.show();
                     return false;
                 } else {
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             if (!isNetworkAvailable) {
-
+                mDialogBuilder.show();
             }else {
                 GmsBarcodeScanner scanner = GmsBarcodeScanning.getClient(MainActivity.this, options);
                 scanner

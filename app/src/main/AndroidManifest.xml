@@ -33,6 +33,7 @@
 
         <activity
             android:name=".ui.ResultsActivity"
+            android:launchMode="singleTask"
             android:exported="false"
             android:parentActivityName=".ui.MainActivity" />
         <activity

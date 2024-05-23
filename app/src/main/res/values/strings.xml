@@ -31,4 +31,7 @@
     <string name="dismiss_error">Dismiss</string>
     <string name="barcodeResultsTitleString">Unknown</string>
     <string name="grams" translatable="false">g</string>
+    <string name="no_connection_alert_title">No connection available</string>
+    <string name="ok_string">Ok</string>
+    <string name="no_connection_message">Check your internet connection, it\'s needed to fetch the food data</string>
 </resources>
