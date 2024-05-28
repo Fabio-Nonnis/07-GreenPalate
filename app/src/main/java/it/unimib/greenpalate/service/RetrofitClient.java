@@ -5,6 +5,8 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.TimeUnit;
+
 import it.unimib.greenpalate.utils.ConstUtils;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -23,8 +25,12 @@ public class RetrofitClient {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(ConstUtils.OPEN_FOOD_FACTS_API_BASEURL)
                 .client(new OkHttpClient()
                         .newBuilder()
+                        .connectTimeout(30, TimeUnit.SECONDS)
+                        .writeTimeout(30, TimeUnit.SECONDS)
+                        .readTimeout(30, TimeUnit.SECONDS)
                         .build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
+
                 .build();
         api = retrofit.create(OpenFoodFactsApiService.class);
         Log.d(TAG, "RetrofitClient created");

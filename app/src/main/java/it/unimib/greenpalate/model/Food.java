@@ -49,7 +49,8 @@ public class Food {
     public Food() {
     }
 
-    public Food(String barcode, String image, Nutriments nutriments, String allergens, String brand, String nutriscoreGrade, String packagingMaterial, String productName, String servingSize, String ecoScoreGrade) {
+    public Food(String barcode, String image, Nutriments nutriments, String allergens, String brand, String nutriscoreGrade,
+                String packagingMaterial, String productName, String servingSize, String ecoScoreGrade) {
         this.barcode = barcode;
         this.image = image;
         this.nutriments = nutriments;

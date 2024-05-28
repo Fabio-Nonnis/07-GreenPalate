@@ -1,7 +1,6 @@
 package it.unimib.greenpalate.ui;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,18 +9,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import it.unimib.greenpalate.R;
+import it.unimib.greenpalate.database.HistoryRoomDatabase;
+import it.unimib.greenpalate.model.Food;
 import it.unimib.greenpalate.model.FoodResponse;
+import it.unimib.greenpalate.model.History;
 import it.unimib.greenpalate.model.Nutriments;
+import it.unimib.greenpalate.service.ImageLoadTask;
 import it.unimib.greenpalate.ui.viewmodel.FoodFactsVewModelFactory;
 import it.unimib.greenpalate.ui.viewmodel.FoodFactsViewModel;
 import it.unimib.greenpalate.utils.Utilities;
@@ -37,13 +36,23 @@ public class BarcodeResultsActivity extends AppCompatActivity {
     TextView mSalt;
     TextView mSodium;
     TextView mTitle;
+    TextView m100G;
     TextView mServingSize;
-    ImageView ecoscoreImageView;
+    ImageView mEcoscoreImageView;
     ProgressBar mProgressBar;
     CardView mCardView;
     String barcode;
     Nutriments nutriments;
-
+    ImageView mNutriscoreImageView;
+    ImageView mFoodImageView;
+    TextView mCarbServing;
+    TextView mProteinServing;
+    TextView mFatServing;
+    TextView mSaturatedFatServing;
+    TextView mCaloriesServing;
+    TextView mSugarServing;
+    TextView mSaltServing;
+    TextView mSodiumServing;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -61,10 +70,21 @@ public class BarcodeResultsActivity extends AppCompatActivity {
         mSalt = findViewById(R.id.saltValue);
         mSodium = findViewById(R.id.sodiumValue);
         mTitle = findViewById(R.id.barcodeResultsTitleTextView);
-        ecoscoreImageView = findViewById(R.id.ecoscoreImageView);
+        mEcoscoreImageView = findViewById(R.id.ecoscoreImageView);
         mProgressBar = findViewById(R.id.barcode_results_progress_bar);
         mCardView = findViewById(R.id.barcode_results_transpartent_card_view);
-        mServingSize = findViewById(R.id.ggg);
+        m100G = findViewById(R.id.ggg);
+        mServingSize = findViewById(R.id.nutrimentsTableServingSize);
+        mNutriscoreImageView = findViewById(R.id.nutriscore_imageview);
+        mFoodImageView = findViewById(R.id.food_imageview);
+        mCarbServing = findViewById(R.id.carbServingValue);
+        mProteinServing = findViewById(R.id.proteinServingValue);
+        mFatServing = findViewById(R.id.fatServingValue);
+        mSaturatedFatServing = findViewById(R.id.saturatedFatServingValue);
+        mCaloriesServing = findViewById(R.id.energyServingValue);
+        mSugarServing = findViewById(R.id.sugarServingValue);
+        mSaltServing = findViewById(R.id.saltServingValue);
+        mSodiumServing = findViewById(R.id.sodiumServingValue);
 
         mProgressBar.setVisibility(View.VISIBLE);
         mCardView.setVisibility(View.VISIBLE);
@@ -84,8 +104,12 @@ public class BarcodeResultsActivity extends AppCompatActivity {
                     Log.d(TAG, "foodResponse: " + (foodResponse.toString()));
                     // se gli allergeni sono vuoti aggiungere una stringa che dice nessun allergeno/traduzione
                     // aggiungere tutte le unità di misura ai nutrienti
-                    mTitle.setText(foodResponse.getProduct().getProductName());
-                    Utilities.ecoScoreSetter(foodResponse.getProduct().getEcoScoreGrade(), ecoscoreImageView);
+                    Food food = foodResponse.getProduct();
+                    mTitle.setText(food.getProductName());
+                    Utilities.ecoScoreSetter(food.getEcoScoreGrade(), mEcoscoreImageView);
+                    Utilities.nutriscoreSetter(food.getNutriscoreGrade(), mNutriscoreImageView);
+                    new ImageLoadTask(food.getImage(), mFoodImageView).execute();
+
                     nutriments = foodResponse.getProduct().getNutriments();
 
                     mCarbohydrates.setText(nutriments.getCarbohydrates() + getString(R.string.grams));
@@ -96,10 +120,23 @@ public class BarcodeResultsActivity extends AppCompatActivity {
                     mSugar.setText(nutriments.getSugar() + getString(R.string.grams));
                     mSalt.setText(nutriments.getSalt() + getString(R.string.grams));
                     mSodium.setText(nutriments.getSodium() + getString(R.string.grams));
+                    mServingSize.setText(food.getServingSize());
+                    mCarbServing.setText(nutriments.getCarbohydratesServing() + getString(R.string.grams));
+                    mProteinServing.setText(nutriments.getProteinsServing() + getString(R.string.grams));
+                    mFatServing.setText(nutriments.getFatServing() + getString(R.string.grams));
+                    mSaturatedFatServing.setText(nutriments.getSaturatedFatServing() + getString(R.string.grams));
+                    mCaloriesServing.setText(nutriments.getEnergyServing() + " kCal");
+                    mSugarServing.setText(nutriments.getSugarsServing() + getString(R.string.grams));
+                    mSaltServing.setText(nutriments.getSaltServing() + getString(R.string.grams));
+                    mSodiumServing.setText(nutriments.getSodiumServing() + getString(R.string.grams));
+
+
 //                  mServingSize.setText(foodResponse.getProduct().getServingSize() + "g");
 
                     mProgressBar.setVisibility(View.GONE);
                     mCardView.setVisibility(View.GONE);
+
+                    HistoryRoomDatabase.getInstance(getApplication()).historyDao().upsert(new History(barcode, food.getProductName(), food.getBrand(), food.getImage(), food.getEcoScoreGrade()));
                 }
             });
         } catch (Exception e) {

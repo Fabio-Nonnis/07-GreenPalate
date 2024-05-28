@@ -62,15 +62,15 @@
                 android:id="@+id/barcodeResultsTitleTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="64dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/barcodeResultsTitleString"
                 android:textSize="28sp"
+                app:layout_constraintBottom_toBottomOf="@+id/food_imageview"
                 app:layout_constraintEnd_toStartOf="@+id/ecoscoreImageView"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/food_imageview"
+                app:layout_constraintTop_toTopOf="@+id/food_imageview" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_nutriments"
@@ -84,7 +84,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ecoscoreImageView"
+                app:layout_constraintTop_toBottomOf="@+id/food_imageview"
                 app:layout_constraintVertical_bias="0.0">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,7 +92,7 @@
                     android:layout_height="match_parent">
 
                     <TableLayout
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
                         android:paddingStart="6dp"
@@ -107,7 +107,7 @@
                         <TableRow
 
                             android:id="@+id/nutrimentsTable"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent">
 
                             <!-- first element of the row-->
@@ -115,88 +115,31 @@
 
                             <TextView
                                 android:id="@+id/nutrimentsTableTitle2"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:paddingStart="4dp"
                                 android:text="Nutritional Facts"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/ggg"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:paddingStart="50dp"
+                                android:paddingStart="8dp"
                                 android:text="100g"
                                 android:textSize="16sp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/carbohydratesRow"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="left">
 
                             <TextView
-                                android:id="@+id/carbohydratesRowTextView"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:text="@string/carbohydrates_textview"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/carbValue"
-                                android:layout_width="match_parent"
+                                android:id="@+id/nutrimentsTableServingSize"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/fatRow"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="left">
-
-                            <TextView
-                                android:id="@+id/fatRowTextView"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:paddingRight="12dp"
-                                android:text="@string/fat_row_textview"
+                                android:paddingStart="32dp"
+                                android:paddingEnd="4dp"
                                 android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/fatValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="right"
-                                android:textSize="16sp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/proteinRow"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="left">
-
-                            <TextView
-                                android:id="@+id/proteinRowTextString"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:paddingRight="12dp"
-                                android:text="@string/protein_textview"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/proteinValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="right"
-                                android:textSize="16sp" />
                         </TableRow>
 
                         <TableRow
@@ -207,7 +150,7 @@
 
                             <TextView
                                 android:id="@+id/energyRowTextView"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:paddingStart="4dp"
                                 android:paddingRight="12dp"
@@ -216,11 +159,115 @@
 
                             <TextView
                                 android:id="@+id/energyValue"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:paddingStart="32dp"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/energyServingValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:paddingStart="42dp"
+                                android:textSize="16sp" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/carbohydratesRow"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left">
+
+                            <TextView
+                                android:id="@+id/carbohydratesRowTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingStart="4dp"
+                                android:text="@string/carbohydrates_textview"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/carbValue"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
                                 android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/carbServingValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+
                         </TableRow>
+
+                        <TableRow
+                            android:id="@+id/fatRow"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left">
+
+                            <TextView
+                                android:id="@+id/fatRowTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingStart="4dp"
+                                android:paddingRight="12dp"
+                                android:text="@string/fat_row_textview"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/fatValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/fatServingValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/proteinRow"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left">
+
+                            <TextView
+                                android:id="@+id/proteinRowTextString"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingStart="4dp"
+                                android:paddingRight="12dp"
+                                android:text="@string/protein_textview"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/proteinValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/proteinServingValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+
+                        </TableRow>
+
+
 
                         <TableRow
                             android:id="@+id/saturatedFatRow"
@@ -230,7 +277,7 @@
 
                             <TextView
                                 android:id="@+id/saturatedFAtTextView"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:paddingStart="4dp"
                                 android:paddingRight="12dp"
@@ -239,10 +286,18 @@
 
                             <TextView
                                 android:id="@+id/saturatedFatValue"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
                                 android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/saturatedFatServingValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+
                         </TableRow>
 
                         <TableRow
@@ -253,7 +308,7 @@
 
                             <TextView
                                 android:id="@+id/sodiumTextView"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:paddingStart="4dp"
                                 android:paddingRight="12dp"
@@ -262,10 +317,18 @@
 
                             <TextView
                                 android:id="@+id/sodiumValue"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
                                 android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/sodiumServingValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+
                         </TableRow>
 
                         <TableRow
@@ -276,7 +339,7 @@
 
                             <TextView
                                 android:id="@+id/saltTextView"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:paddingStart="4dp"
                                 android:paddingRight="12dp"
@@ -285,10 +348,18 @@
 
                             <TextView
                                 android:id="@+id/saltValue"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
                                 android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/saltServingValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+
                         </TableRow>
 
                         <TableRow
@@ -299,7 +370,7 @@
 
                             <TextView
                                 android:id="@+id/sugarTextView"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:paddingStart="4dp"
                                 android:paddingRight="12dp"
@@ -308,16 +379,62 @@
 
                             <TextView
                                 android:id="@+id/sugarValue"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
                                 android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/sugarServingValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+
                         </TableRow>
 
                     </TableLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/cardview_nutriments"
+                app:layout_constraintStart_toStartOf="@id/cardview_nutriments"
+                app:layout_constraintTop_toBottomOf="@id/cardview_nutriments">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/nutriscore_imageview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/nutriscore_default" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/food_imageview"
+                android:layout_width="82dp"
+                android:layout_height="134dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/no_image" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
