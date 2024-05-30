@@ -16,10 +16,12 @@ public interface HistoryDao {
     public void upsert(History history);
     @Delete
     public void delete(History history);
-    @Query ("SELECT * FROM history WHERE id LIKE :id LIMIT 1")
+    @Query ("SELECT * FROM history WHERE barcode LIKE :id LIMIT 1")
     History findById(int id);
     @Query ("SELECT * FROM history")
     List<History> getAll();
-    @Query ("SELECT * FROM history WHERE id IN (:foodIds)")
+    @Query ("SELECT * FROM history WHERE barcode IN (:foodIds)")
     List<History> loadAllByIds(int[]foodIds);
+    @Query("DELETE FROM history where uid NOT IN (SELECT uid from history ORDER BY uid DESC LIMIT 20)")
+    void clear();
 }

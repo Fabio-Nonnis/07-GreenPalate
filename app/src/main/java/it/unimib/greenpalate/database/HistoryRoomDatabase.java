@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import it.unimib.greenpalate.model.History;
 
-@Database(entities = {History.class}, version = 1)
+@Database(entities = {History.class}, version = 3)
 public abstract class HistoryRoomDatabase extends RoomDatabase {
 
     public abstract HistoryDao historyDao();
@@ -20,6 +20,8 @@ public abstract class HistoryRoomDatabase extends RoomDatabase {
             INSTANCE = Room
                     .databaseBuilder(context.getApplicationContext(),
                             HistoryRoomDatabase.class, "history_database")
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build();
         return INSTANCE;
     }

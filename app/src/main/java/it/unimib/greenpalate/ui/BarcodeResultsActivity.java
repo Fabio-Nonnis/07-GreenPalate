@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import it.unimib.greenpalate.R;
+import it.unimib.greenpalate.database.HistoryDao;
 import it.unimib.greenpalate.database.HistoryRoomDatabase;
 import it.unimib.greenpalate.model.Food;
 import it.unimib.greenpalate.model.FoodResponse;
@@ -53,6 +54,8 @@ public class BarcodeResultsActivity extends AppCompatActivity {
     TextView mSugarServing;
     TextView mSaltServing;
     TextView mSodiumServing;
+    HistoryDao historyDao;
+    History history;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -60,6 +63,8 @@ public class BarcodeResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_barcode_results);
+
+        historyDao = HistoryRoomDatabase.getInstance(getApplication()).historyDao();
 
         mCarbohydrates = findViewById(R.id.carbValue);
         mProtein = findViewById(R.id.proteinValue);
@@ -136,7 +141,10 @@ public class BarcodeResultsActivity extends AppCompatActivity {
                     mProgressBar.setVisibility(View.GONE);
                     mCardView.setVisibility(View.GONE);
 
-                    HistoryRoomDatabase.getInstance(getApplication()).historyDao().upsert(new History(barcode, food.getProductName(), food.getBrand(), food.getImage(), food.getEcoScoreGrade()));
+                    history = new History(barcode, food.getProductName(), food.getBrand(), food.getImage(), food.getEcoScoreGrade());
+                    historyDao.delete(history);
+                    historyDao.upsert(history);
+                    historyDao.clear();
                 }
             });
         } catch (Exception e) {

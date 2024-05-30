@@ -15,66 +15,55 @@ import java.util.List;
 
 import it.unimib.greenpalate.R;
 import it.unimib.greenpalate.model.Food;
+import it.unimib.greenpalate.model.History;
 import it.unimib.greenpalate.service.ImageLoadTask;
 import it.unimib.greenpalate.utils.Utilities;
 
-public class FoodResponseAdapter extends RecyclerView.Adapter<FoodResponseAdapter.ViewHolder> {
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
-    private final IFoodResponseRecyclerView recyclerViewInterface;
+    private final IHistoryRecyclerView recyclerViewInterface;
     Context context;
-    List<Food> foodResponseList;
+    List<History> foodList;
 
-    private static final String TAG = FoodResponseAdapter.class.getSimpleName();
+    private static final String TAG = "HistoryAdapter";
 
-    public FoodResponseAdapter(Context context, List<Food> foodResponseList,  IFoodResponseRecyclerView recyclerViewInterface){
+    public HistoryAdapter(Context context, IHistoryRecyclerView recyclerViewInterface, List<History> foodList){
         this.context = context;
-        this.foodResponseList = foodResponseList;
         this.recyclerViewInterface = recyclerViewInterface;
+        this.foodList = foodList;
     }
-
 
     @NonNull
     @Override
-    public FoodResponseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.food_item, parent, false);
 
-        return new FoodResponseAdapter.ViewHolder(view, recyclerViewInterface);
+        return new HistoryAdapter.ViewHolder(view, recyclerViewInterface);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodResponseAdapter.ViewHolder holder, int position) {
-        Food food = foodResponseList.get(position);
-        String ecoscore = food.getEcoScoreGrade();
+    public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
 
-        holder.foodNameTextView.setText(food.getProductName());
-        holder.foodBrandTextView.setText(food.getBrand());
+        History food = foodList.get(position);
+        String ecoscore = food.getEcoScore();
+
+        holder.foodNameTextView.setText(food.getName());
+        holder.foodBrandTextView.setText(food.getBrandName());
         Utilities.ecoScoreSetter(ecoscore, holder.ecoScoreImageView);
         new ImageLoadTask(food.getImage(), holder.foodImageView).execute();
-//        holder.foodImageView.setImageBitmap(getBitmapFromURL(food.getImage()));
-//        if (ecoscore.equalsIgnoreCase("A"))
-//            holder.ecoScoreImageView.setImageResource(R.drawable.eco_score_a);
-//        else if (ecoscore.equalsIgnoreCase("B"))
-//            holder.ecoScoreImageView.setImageResource(R.drawable.eco_score_b);
-//        else if (ecoscore.equalsIgnoreCase("C"))
-//            holder.ecoScoreImageView.setImageResource(R.drawable.eco_score_c);
-//        else if (ecoscore.equalsIgnoreCase("D"))
-//            holder.ecoScoreImageView.setImageResource(R.drawable.eco_score_d);
-//        holder.ecoScoreImageView.setImageResource(food.getEcoScore());
-//        holder.foodImageView.setImageResource(food.getImage());
     }
 
     @Override
     public int getItemCount() {
 
-        if(foodResponseList == null)
+        if(foodList == null)
             return 0;
         else {
-            Log.d(TAG, "getItemCount: " + foodResponseList.size());
-            return foodResponseList.size();
-        }
-    }
+            Log.d(TAG, "getItemCount: " + foodList.size());
+            return foodList.size();
+        }    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -83,7 +72,7 @@ public class FoodResponseAdapter extends RecyclerView.Adapter<FoodResponseAdapte
         ImageView foodImageView;
         ImageView ecoScoreImageView;
 
-        public ViewHolder(@NonNull View itemView, IFoodResponseRecyclerView recyclerViewInterface) {
+        public ViewHolder(@NonNull View itemView, IHistoryRecyclerView recyclerViewInterface) {
             super(itemView);
 
             foodImageView = itemView.findViewById(R.id.itemImageView);

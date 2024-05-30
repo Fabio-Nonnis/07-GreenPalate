@@ -31,9 +31,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="6dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,10 +52,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:contentDescription="TODO"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/scan_icon"
-                android:contentDescription="TODO" />
+                app:srcCompat="@drawable/scan_icon" />
 
             <TextView
                 android:id="@+id/textView"
@@ -69,10 +69,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/HistoryRecyclerView"
+                android:id="@+id/historyRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginBottom="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
