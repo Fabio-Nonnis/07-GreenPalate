@@ -1,9 +1,9 @@
 package it.unimib.greenpalate.model;
 
 
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
 
-import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 
 public class Food {
@@ -29,6 +29,7 @@ public class Food {
     @SerializedName("ecoscore_grade")
     private String ecoScoreGrade;
 
+    @NonNull
     @Override
     public String toString() {
         return "{" +

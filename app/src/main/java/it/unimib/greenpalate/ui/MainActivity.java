@@ -2,14 +2,10 @@ package it.unimib.greenpalate.ui;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
@@ -21,15 +17,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.google.mlkit.vision.codescanner.GmsBarcodeScanner;
-//import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions;
-//import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
-
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanner;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import it.unimib.greenpalate.R;
@@ -42,10 +35,10 @@ import it.unimib.greenpalate.utils.Utilities;
 
 public class MainActivity extends AppCompatActivity implements IHistoryRecyclerView {
 
-    private static final String mainActivityTAG = "Main Activity";
+    private static final String TAG = "Main Activity";
     private List<History> mFoodList;
     private HistoryAdapter mAdapter;
-    private IHistoryRecyclerView mRrecyclerViewInterface;
+    private IHistoryRecyclerView mRecyclerViewInterface;
     private Context context;
     private RecyclerView mRecyclerView;
     private HistoryDao historyDao;
@@ -64,39 +57,41 @@ public class MainActivity extends AppCompatActivity implements IHistoryRecyclerV
 
         historyDao = HistoryRoomDatabase.getInstance(getApplication()).historyDao();
 
-        mRrecyclerViewInterface = this;
+        mRecyclerViewInterface = this;
 
         mRecyclerView = findViewById(R.id.historyRecyclerView);
         context = this;
         mFoodList = new ArrayList<>();
         mFoodList = historyDao.getAll();
-        mAdapter = new HistoryAdapter(context, mRrecyclerViewInterface, mFoodList);
+        Collections.reverse(mFoodList);
+        mAdapter = new HistoryAdapter(context, mRecyclerViewInterface, mFoodList);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
 
 
         SearchView mFoodSearchView = findViewById(R.id.foodInputSearchView);
 
-        AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this)
+        AlertDialog.Builder noConnectionDialogBuilder = new AlertDialog.Builder(this)
                 .setCancelable(false)
                 .setTitle((R.string.no_connection_alert_title))
                 .setMessage(R.string.no_connection_message)
-                .setPositiveButton(R.string.ok_string, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                })
+                .setPositiveButton(R.string.ok_string, (dialog, which) -> dialog.cancel())
                 .setIcon(R.drawable.no_wifi);
 
         mFoodSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String submit) {
                 if (!Utilities.isNetworkAvailable(getApplication())) {
-                    mDialogBuilder.show();
+                    noConnectionDialogBuilder.show();
                     return false;
                 } else {
 
-                    Log.d(mainActivityTAG, submit);
+                    Log.d(TAG, submit);
                     Intent i = new Intent(MainActivity.this, ResultsActivity.class);
                     i.putExtra("foodName", submit);
                     startActivity(i);
@@ -119,17 +114,8 @@ public class MainActivity extends AppCompatActivity implements IHistoryRecyclerV
          mScanButton.setOnClickListener(v-> {
              boolean isNetworkAvailable = Utilities.isNetworkAvailable(this.getApplication());
 
-//             String bc = "0000080946458"; //nutella
-//             Log.d("BarcodeStart", "barcode start");
-//             Intent i = new Intent(MainActivity.this, BarcodeResultsActivity.class);
-//             i.putExtra("barcode", bc);
-//             Log.d("BarcodeTest", ""+bc);
-//             startActivity(i);
-
-
-
             if (!isNetworkAvailable) {
-                mDialogBuilder.show();
+                noConnectionDialogBuilder.show();
             }else {
                 GmsBarcodeScanner scanner = GmsBarcodeScanning.getClient(MainActivity.this, options);
                 scanner
@@ -141,7 +127,8 @@ public class MainActivity extends AppCompatActivity implements IHistoryRecyclerV
                                     Log.d("BarcodeScanner", "barcode success");
                                     Intent i = new Intent(MainActivity.this, BarcodeResultsActivity.class);
                                     i.putExtra("barcode", bc);
-                                    Log.d("BarcodeTest", "" + bc);
+                                    assert bc != null;
+                                    Log.d("BarcodeTest", bc);
                                     startActivity(i);
                                 })
                         .addOnCanceledListener(
@@ -157,6 +144,13 @@ public class MainActivity extends AppCompatActivity implements IHistoryRecyclerV
                                 });
             }
          });
+    }
+    protected void onRestart() {
+        super.onRestart();
+        mFoodList = historyDao.getAll();
+        Collections.reverse(mFoodList);
+        mAdapter = new HistoryAdapter(context, mRecyclerViewInterface, mFoodList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override

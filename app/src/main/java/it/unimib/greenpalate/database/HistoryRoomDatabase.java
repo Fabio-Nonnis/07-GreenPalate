@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import it.unimib.greenpalate.model.History;
 
-@Database(entities = {History.class}, version = 3)
+@Database(entities = {History.class}, version = 4)
 public abstract class HistoryRoomDatabase extends RoomDatabase {
 
     public abstract HistoryDao historyDao();

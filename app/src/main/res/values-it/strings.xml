@@ -12,4 +12,9 @@
     <string name="sodium_textview">Sodio</string>
     <string name="salt_textview">Sale</string>
     <string name="sugar_textview">Zucchero</string>
+    <string name="barcode_results_title">Sconosciuto</string>
+    <string name="no_connection_alert_title">Connessione a internet non dissponibile</string>
+    <string name="no_connection_message">Controlla che il tuo telefono sia collegato a internet e riprova</string>
+    <string name="no_results_alert">La ricerca non ha prodotto alcun risultato</string>
+    <string name="back_string">Indietro</string>
 </resources>

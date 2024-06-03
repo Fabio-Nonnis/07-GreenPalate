@@ -3,14 +3,15 @@ package it.unimib.greenpalate.model;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity (tableName = "history", indices = {@Index(value = {"barcode"}, unique = true)})
 public class History {
 
     @NonNull
-    @PrimaryKey
     private String barcode;
+    @PrimaryKey(autoGenerate = true)
     private int uid;
     @ColumnInfo(name = "name")
     private String name;

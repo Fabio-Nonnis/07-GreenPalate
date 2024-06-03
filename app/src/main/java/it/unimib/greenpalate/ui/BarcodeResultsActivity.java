@@ -28,34 +28,36 @@ import it.unimib.greenpalate.utils.Utilities;
 
 public class BarcodeResultsActivity extends AppCompatActivity {
     private static final String TAG = "BarcodeResultsActivity";
-    TextView mCarbohydrates;
-    TextView mProtein;
-    TextView mFat;
-    TextView mSaturatedFat;
-    TextView mCalories;
-    TextView mSugar;
-    TextView mSalt;
-    TextView mSodium;
-    TextView mTitle;
-    TextView m100G;
-    TextView mServingSize;
-    ImageView mEcoscoreImageView;
-    ProgressBar mProgressBar;
-    CardView mCardView;
-    String barcode;
-    Nutriments nutriments;
-    ImageView mNutriscoreImageView;
-    ImageView mFoodImageView;
-    TextView mCarbServing;
-    TextView mProteinServing;
-    TextView mFatServing;
-    TextView mSaturatedFatServing;
-    TextView mCaloriesServing;
-    TextView mSugarServing;
-    TextView mSaltServing;
-    TextView mSodiumServing;
-    HistoryDao historyDao;
-    History history;
+    private TextView mCarbohydrates;
+    private TextView mProtein;
+    private TextView mFat;
+    private TextView mSaturatedFat;
+    private TextView mCalories;
+    private TextView mSugar;
+    private TextView mSalt;
+    private TextView mSodium;
+    private TextView mTitle;
+    private TextView m100G;
+    private TextView mServingSize;
+    private ImageView mEcoscoreImageView;
+    private ProgressBar mProgressBar;
+    private CardView mCardView;
+    private String barcode;
+    private Nutriments nutriments;
+    private ImageView mNutriscoreImageView;
+    private ImageView mFoodImageView;
+    private TextView mCarbServing;
+    private TextView mProteinServing;
+    private TextView mFatServing;
+    private TextView mSaturatedFatServing;
+    private TextView mCaloriesServing;
+    private TextView mSugarServing;
+    private TextView mSaltServing;
+    private TextView mSodiumServing;
+    private HistoryDao historyDao;
+    private History history;
+    private TextView mPackaging;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -90,6 +92,7 @@ public class BarcodeResultsActivity extends AppCompatActivity {
         mSugarServing = findViewById(R.id.sugarServingValue);
         mSaltServing = findViewById(R.id.saltServingValue);
         mSodiumServing = findViewById(R.id.sodiumServingValue);
+        mPackaging = findViewById(R.id.packagingMaterialTextView);
 
         mProgressBar.setVisibility(View.VISIBLE);
         mCardView.setVisibility(View.VISIBLE);
@@ -110,6 +113,10 @@ public class BarcodeResultsActivity extends AppCompatActivity {
                     // se gli allergeni sono vuoti aggiungere una stringa che dice nessun allergeno/traduzione
                     // aggiungere tutte le unità di misura ai nutrienti
                     Food food = foodResponse.getProduct();
+
+                    history = new History(barcode, food.getProductName(), food.getBrand(), food.getImage(), food.getEcoScoreGrade());
+                    historyDao.delete(barcode);
+
                     mTitle.setText(food.getProductName());
                     Utilities.ecoScoreSetter(food.getEcoScoreGrade(), mEcoscoreImageView);
                     Utilities.nutriscoreSetter(food.getNutriscoreGrade(), mNutriscoreImageView);
@@ -134,6 +141,7 @@ public class BarcodeResultsActivity extends AppCompatActivity {
                     mSugarServing.setText(nutriments.getSugarsServing() + getString(R.string.grams));
                     mSaltServing.setText(nutriments.getSaltServing() + getString(R.string.grams));
                     mSodiumServing.setText(nutriments.getSodiumServing() + getString(R.string.grams));
+                    mPackaging.setText(food.getPackagingMaterial());
 
 
 //                  mServingSize.setText(foodResponse.getProduct().getServingSize() + "g");
@@ -141,8 +149,6 @@ public class BarcodeResultsActivity extends AppCompatActivity {
                     mProgressBar.setVisibility(View.GONE);
                     mCardView.setVisibility(View.GONE);
 
-                    history = new History(barcode, food.getProductName(), food.getBrand(), food.getImage(), food.getEcoScoreGrade());
-                    historyDao.delete(history);
                     historyDao.upsert(history);
                     historyDao.clear();
                 }
