@@ -61,9 +61,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         if(foodList == null)
             return 0;
         else {
-            Log.d(TAG, "getItemCount: " + foodList.size());
             return foodList.size();
-        }    }
+        }
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

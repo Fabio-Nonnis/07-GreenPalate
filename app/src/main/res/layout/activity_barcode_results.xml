@@ -47,6 +47,16 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/food_imageview"
+                android:layout_width="82dp"
+                android:layout_height="134dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/barcodeResultsBrandName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/barcodeResultsTitleTextView"
+                app:srcCompat="@drawable/no_image" />
+
+            <ImageView
                 android:id="@+id/ecoscoreImageView"
                 android:layout_width="57dp"
                 android:layout_height="68dp"
@@ -62,29 +72,30 @@
                 android:id="@+id/barcodeResultsTitleTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="24dp"
                 android:text="@string/barcode_results_title"
-                android:textSize="28sp"
-                app:layout_constraintBottom_toBottomOf="@+id/food_imageview"
+                android:textSize="34sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/ecoscoreImageView"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/food_imageview"
-                app:layout_constraintTop_toTopOf="@+id/food_imageview" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_nutriments"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="52dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/food_imageview"
+                app:layout_constraintTop_toBottomOf="@+id/barcodeResultsBrandName"
                 app:layout_constraintVertical_bias="0.0">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -117,9 +128,8 @@
                                 android:id="@+id/nutrimentsTableTitle2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:paddingStart="4dp"
                                 android:text="Nutritional Facts"
-                                android:textSize="20sp"
+                                android:textSize="24sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -127,18 +137,17 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:paddingStart="8dp"
+                                android:paddingLeft="4dp"
                                 android:text="100g"
-                                android:textSize="16sp" />
+                                android:textSize="24sp" />
 
                             <TextView
                                 android:id="@+id/nutrimentsTableServingSize"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:paddingStart="32dp"
-                                android:paddingEnd="4dp"
-                                android:textSize="16sp" />
+                                android:paddingStart="4dp"
+                                android:textSize="24sp" />
 
                         </TableRow>
 
@@ -152,26 +161,25 @@
                                 android:id="@+id/energyRowTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:paddingRight="12dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
                                 android:text="@string/energy_textview"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/energyValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:paddingStart="32dp"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/energyServingValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:paddingStart="42dp"
-                                android:textSize="16sp" />
+                                android:paddingStart="16dp"
+                                android:textSize="20sp" />
 
                         </TableRow>
 
@@ -185,23 +193,24 @@
                                 android:id="@+id/carbohydratesRowTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:paddingStart="4dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
                                 android:text="@string/carbohydrates_textview"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/carbValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/carbServingValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                         </TableRow>
 
@@ -215,24 +224,24 @@
                                 android:id="@+id/fatRowTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:paddingRight="12dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
                                 android:text="@string/fat_row_textview"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/fatValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/fatServingValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                         </TableRow>
 
@@ -246,24 +255,24 @@
                                 android:id="@+id/proteinRowTextString"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:paddingRight="12dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
                                 android:text="@string/protein_textview"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/proteinValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/proteinServingValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                         </TableRow>
 
@@ -278,24 +287,24 @@
                                 android:id="@+id/saturatedFAtTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:paddingRight="12dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
                                 android:text="@string/saturated_fat_textview"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/saturatedFatValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/saturatedFatServingValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                         </TableRow>
 
@@ -309,24 +318,24 @@
                                 android:id="@+id/sodiumTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:paddingRight="12dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
                                 android:text="@string/sodium_textview"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/sodiumValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/sodiumServingValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                         </TableRow>
 
@@ -340,24 +349,24 @@
                                 android:id="@+id/saltTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:paddingRight="12dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
                                 android:text="@string/salt_textview"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/saltValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/saltServingValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                         </TableRow>
 
@@ -371,24 +380,24 @@
                                 android:id="@+id/sugarTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:paddingRight="12dp"
+                                android:paddingEnd="0dp"
+                                android:paddingRight="0dp"
                                 android:text="@string/sugar_textview"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/sugarValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/sugarServingValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="right"
-                                android:textSize="16sp" />
+                                android:textSize="20sp" />
 
                         </TableRow>
 
@@ -401,8 +410,8 @@
                 android:id="@+id/cardView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cardview_nutriments"
@@ -431,11 +440,14 @@
                 android:id="@+id/packagingCardView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cardView2"
                 app:layout_constraintStart_toStartOf="@+id/cardView2"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2">
+                app:layout_constraintTop_toBottomOf="@+id/cardView2"
+                app:layout_constraintVertical_bias="0.0">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -445,10 +457,10 @@
                         android:id="@+id/packagingMaterialTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="4dp"
-                        android:text="TextView"
-                        android:textSize="20sp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/packaging_material"
+                        android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -457,27 +469,74 @@
                         android:id="@+id/packagingMaterialTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:text="TextView"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/not_available"
+                        android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/packagingMaterialTitle"
                         app:layout_constraintTop_toBottomOf="@id/packagingMaterialTitle" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/food_imageview"
-                android:layout_width="82dp"
-                android:layout_height="134dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/no_image" />
+            <TextView
+                android:id="@+id/barcodeResultsBrandName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/barcodeResultsTitleTextView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/barcodeResultsTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/barcodeResultsTitleTextView" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/cardView2"
+                app:layout_constraintStart_toStartOf="@+id/cardview_nutriments"
+                app:layout_constraintTop_toBottomOf="@+id/packagingCardView"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/allergensTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/allergens"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/allergensTextViewMessage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/not_available"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/allergensTitle"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/allergensTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/allergensTitle" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

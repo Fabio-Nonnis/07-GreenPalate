@@ -17,4 +17,6 @@
     <string name="no_connection_message">Controlla che il tuo telefono sia collegato a internet e riprova</string>
     <string name="no_results_alert">La ricerca non ha prodotto alcun risultato</string>
     <string name="back_string">Indietro</string>
+    <string name="packaging_material">Materiali confezione</string>
+    <string name="allergens">Allergeni</string>
 </resources>

@@ -52,17 +52,6 @@ public class FoodResponseAdapter extends RecyclerView.Adapter<FoodResponseAdapte
         holder.foodBrandTextView.setText(food.getBrand());
         Utilities.ecoScoreSetter(ecoscore, holder.ecoScoreImageView);
         new ImageLoadTask(food.getImage(), holder.foodImageView).execute();
-//        holder.foodImageView.setImageBitmap(getBitmapFromURL(food.getImage()));
-//        if (ecoscore.equalsIgnoreCase("A"))
-//            holder.ecoScoreImageView.setImageResource(R.drawable.eco_score_a);
-//        else if (ecoscore.equalsIgnoreCase("B"))
-//            holder.ecoScoreImageView.setImageResource(R.drawable.eco_score_b);
-//        else if (ecoscore.equalsIgnoreCase("C"))
-//            holder.ecoScoreImageView.setImageResource(R.drawable.eco_score_c);
-//        else if (ecoscore.equalsIgnoreCase("D"))
-//            holder.ecoScoreImageView.setImageResource(R.drawable.eco_score_d);
-//        holder.ecoScoreImageView.setImageResource(food.getEcoScore());
-//        holder.foodImageView.setImageResource(food.getImage());
     }
 
     @Override
@@ -71,7 +60,6 @@ public class FoodResponseAdapter extends RecyclerView.Adapter<FoodResponseAdapte
         if(foodResponseList == null)
             return 0;
         else {
-            Log.d(TAG, "getItemCount: " + foodResponseList.size());
             return foodResponseList.size();
         }
     }

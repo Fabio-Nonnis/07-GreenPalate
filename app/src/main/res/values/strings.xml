@@ -21,4 +21,7 @@
     <string name="no_connection_message">Check your internet connection, it\'s needed to fetch the food data</string>
     <string name="no_results_alert">The search didn\'t produce any results</string>
     <string name="back_string">Back</string>
+    <string name="packaging_material">Packaging material</string>
+    <string name="allergens" >Allergens</string>
+    <string name="not_available">Not available</string>
 </resources>

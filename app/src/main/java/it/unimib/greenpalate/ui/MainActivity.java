@@ -36,6 +36,7 @@ import it.unimib.greenpalate.utils.Utilities;
 public class MainActivity extends AppCompatActivity implements IHistoryRecyclerView {
 
     private static final String TAG = "Main Activity";
+    private SearchView mFoodSearchView;
     private List<History> mFoodList;
     private HistoryAdapter mAdapter;
     private IHistoryRecyclerView mRecyclerViewInterface;
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity implements IHistoryRecyclerV
         });
 
 
-        SearchView mFoodSearchView = findViewById(R.id.foodInputSearchView);
+        mFoodSearchView = findViewById(R.id.foodInputSearchView);
+        mFoodSearchView.setFocusable(false);
 
         AlertDialog.Builder noConnectionDialogBuilder = new AlertDialog.Builder(this)
                 .setCancelable(false)

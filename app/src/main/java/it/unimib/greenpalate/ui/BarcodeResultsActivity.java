@@ -14,6 +14,8 @@ import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.text.DecimalFormat;
+
 import it.unimib.greenpalate.R;
 import it.unimib.greenpalate.database.HistoryDao;
 import it.unimib.greenpalate.database.HistoryRoomDatabase;
@@ -37,7 +39,7 @@ public class BarcodeResultsActivity extends AppCompatActivity {
     private TextView mSalt;
     private TextView mSodium;
     private TextView mTitle;
-    private TextView m100G;
+    TextView m100G;
     private TextView mServingSize;
     private ImageView mEcoscoreImageView;
     private ProgressBar mProgressBar;
@@ -57,7 +59,8 @@ public class BarcodeResultsActivity extends AppCompatActivity {
     private HistoryDao historyDao;
     private History history;
     private TextView mPackaging;
-
+    private TextView mBrandName;
+    private TextView mAllergens;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -93,6 +96,10 @@ public class BarcodeResultsActivity extends AppCompatActivity {
         mSaltServing = findViewById(R.id.saltServingValue);
         mSodiumServing = findViewById(R.id.sodiumServingValue);
         mPackaging = findViewById(R.id.packagingMaterialTextView);
+        mBrandName = findViewById(R.id.barcodeResultsBrandName);
+        mAllergens = findViewById(R.id.allergensTextViewMessage);
+
+        DecimalFormat df = new DecimalFormat("#.#");
 
         mProgressBar.setVisibility(View.VISIBLE);
         mCardView.setVisibility(View.VISIBLE);
@@ -115,7 +122,6 @@ public class BarcodeResultsActivity extends AppCompatActivity {
                     Food food = foodResponse.getProduct();
 
                     history = new History(barcode, food.getProductName(), food.getBrand(), food.getImage(), food.getEcoScoreGrade());
-                    historyDao.delete(barcode);
 
                     mTitle.setText(food.getProductName());
                     Utilities.ecoScoreSetter(food.getEcoScoreGrade(), mEcoscoreImageView);
@@ -124,24 +130,26 @@ public class BarcodeResultsActivity extends AppCompatActivity {
 
                     nutriments = foodResponse.getProduct().getNutriments();
 
-                    mCarbohydrates.setText(nutriments.getCarbohydrates() + getString(R.string.grams));
-                    mProtein.setText(nutriments.getProtein() + getString(R.string.grams));
-                    mFat.setText(nutriments.getFat() + getString(R.string.grams));
-                    mSaturatedFat.setText(nutriments.getSaturatedFat() + getString(R.string.grams));
-                    mCalories.setText(nutriments.getEnergy() + " kCal");
-                    mSugar.setText(nutriments.getSugar() + getString(R.string.grams));
-                    mSalt.setText(nutriments.getSalt() + getString(R.string.grams));
-                    mSodium.setText(nutriments.getSodium() + getString(R.string.grams));
+                    mCarbohydrates.setText(df.format(nutriments.getCarbohydrates()) + getString(R.string.grams));
+                    mProtein.setText(df.format(nutriments.getProtein()) + getString(R.string.grams));
+                    mFat.setText(df.format(nutriments.getFat()) + getString(R.string.grams));
+                    mSaturatedFat.setText(df.format(nutriments.getSaturatedFat()) + getString(R.string.grams));
+                    mCalories.setText(df.format(nutriments.getEnergy()) + " kCal");
+                    mSugar.setText(df.format(nutriments.getSugar()) + getString(R.string.grams));
+                    mSalt.setText(df.format(nutriments.getSalt()) + getString(R.string.grams));
+                    mSodium.setText(df.format(nutriments.getSodium()) + getString(R.string.grams));
                     mServingSize.setText(food.getServingSize());
-                    mCarbServing.setText(nutriments.getCarbohydratesServing() + getString(R.string.grams));
-                    mProteinServing.setText(nutriments.getProteinsServing() + getString(R.string.grams));
-                    mFatServing.setText(nutriments.getFatServing() + getString(R.string.grams));
-                    mSaturatedFatServing.setText(nutriments.getSaturatedFatServing() + getString(R.string.grams));
-                    mCaloriesServing.setText(nutriments.getEnergyServing() + " kCal");
-                    mSugarServing.setText(nutriments.getSugarsServing() + getString(R.string.grams));
-                    mSaltServing.setText(nutriments.getSaltServing() + getString(R.string.grams));
-                    mSodiumServing.setText(nutriments.getSodiumServing() + getString(R.string.grams));
+                    mCarbServing.setText(df.format(nutriments.getCarbohydratesServing()) + getString(R.string.grams));
+                    mProteinServing.setText(df.format(nutriments.getProteinsServing()) + getString(R.string.grams));
+                    mFatServing.setText(df.format(nutriments.getFatServing()) + getString(R.string.grams));
+                    mSaturatedFatServing.setText(df.format(nutriments.getSaturatedFatServing()) + getString(R.string.grams));
+                    mCaloriesServing.setText(df.format(nutriments.getEnergyServing()) + " kCal");
+                    mSugarServing.setText(df.format(nutriments.getSugarsServing()) + getString(R.string.grams));
+                    mSaltServing.setText(df.format(nutriments.getSaltServing()) + getString(R.string.grams));
+                    mSodiumServing.setText(df.format(nutriments.getSodiumServing()) + getString(R.string.grams));
                     mPackaging.setText(food.getPackagingMaterial());
+                    mBrandName.setText(food.getBrand());
+                    mAllergens.setText(food.getAllergens());
 
 
 //                  mServingSize.setText(foodResponse.getProduct().getServingSize() + "g");
@@ -149,6 +157,7 @@ public class BarcodeResultsActivity extends AppCompatActivity {
                     mProgressBar.setVisibility(View.GONE);
                     mCardView.setVisibility(View.GONE);
 
+                    historyDao.delete(barcode);
                     historyDao.upsert(history);
                     historyDao.clear();
                 }
